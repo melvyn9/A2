@@ -1,0 +1,54 @@
+#1
+x1 = int(input("Please enter first xcoordinate"))
+x2 = int(input("Please enter second xcoordinate"))
+y1 = int(input("Please enter first ycoordinate"))
+y2 = int(input("Please enter second ycoordinate"))
+P1 = (x1,y1)
+P2 = (x2,y2)
+def distance(P1,P2):
+    x = P1[0] - P2[0]
+    y = P1[1] - P2[1]
+    dsquared = x*x + y*y
+    result = dsquared**0.5
+    print(result)
+
+distance(P1,P2)
+
+#2
+
+def reflectx(x1,y1):
+    NewY = y1 * -1
+    NewCoords = (x1,NewY)
+    print(NewCoords)
+
+reflectx(x1,y1)
+
+#3
+
+def Slope_from_origin(x1,y1):
+    Slope = y1 / x1
+    print(Slope)
+
+Slope_from_origin(x1,y1)
+
+#4
+
+def equation(P1,P2):
+    x = P1[0] - P2[0]
+    y = P1[1] - P2[1]
+    gradient = y/x
+    c = gradient*x1 + y1
+    print(gradient,c)
+
+equation(P1,P2)
+
+#5
+c1 = (5,0)
+c2 = (-5,0)
+c3 = (0,5)
+c4 = (0,-5)
+
+X = (c1[0] + c2[0])/2
+Y = (c1[1] + c2[1])/2
+
+print("The Centre of the circle is:",X,Y)
