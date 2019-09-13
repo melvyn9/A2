@@ -1,0 +1,26 @@
+#1
+import turtle
+canvas = turtle.Screen()
+canvas.setup(600, 600)
+t = turtle.Turtle()
+t.penup()
+t.pendown()
+t.speed(20)
+
+def koch(t, order, size):
+    if order == 0:
+        t.forward(size)
+    else:
+        koch(t, order-1, size/3)
+        t.left(60)
+        koch(t, order-1, size/3)
+        t.right(120)
+        koch(t, order-1, size/3)
+        t.left(60)
+        koch(t, order-1, size/3)
+
+for i in range(3):
+    koch(t,2,100)
+    t.right(120)
+    
+    
