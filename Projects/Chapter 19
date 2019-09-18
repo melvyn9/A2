@@ -1,0 +1,14 @@
+#1
+def readposint():
+    try:
+        number = int(input("Please input a positive number"))
+        if number <0:
+            print("That is not a postive number")
+            readposint()
+        else:
+            print(number,"is a positive number")
+    except ValueError:
+        print("That is not a number")
+        readposint()
+
+readposint()
