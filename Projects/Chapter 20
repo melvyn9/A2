@@ -1,1 +1,64 @@
+#1
+letter_counts = {}
+for letter in "ThiS is String with Upper and lower case Letters".lower():
+    letter_counts[letter] = letter_counts.get(letter, 0) + 1
 
+newdict = {}
+for i in 'abcdefghijklmnopqrstuvwxyz':
+    try:
+        newdict[i] = letter_counts[i]
+    except:
+        newdict[i] = 0
+print(newdict)
+
+#2
+#a) 35
+#b) 3
+#c) True
+#d) "apples": 15, "bananas": 35, "grapes": 12, "pears":0
+#e) 0
+#f) {("a":6),("b":1),("e":3),...("p":1)}
+#g) False
+
+inventory = {}
+def add_fruit(inventory, fruit, quantity=0):
+    inventory["strawberries"] = 10
+    print("strawberries" in inventory)
+    print(inventory.get("strawberries"))
+    inventory["strawberries"] += 25
+    print(inventory.get("strawberries"))
+
+add_fruit(inventory, "strawberries", 10)
+
+#3
+def alice():
+    alice = open("Alice.txt","w")
+    alice.write("Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, and where is the use of a book, thought Alice, without pictures or conversations? So she was considering in her own mind, (as well as she could, for the hot day made her feel very sleepy and stupid,) whether the pleasure of making a daisy-chain was worth the trouble of getting up and picking the daisies, when a white rabbit with pink eyes ran close by her.")
+    alice.close()
+
+newdict = {}
+letter_count = {}
+info = open("Alice.txt")
+content = info.read()
+words = content.split()
+for i in words:
+    try:
+        newdict[i] = letter_count[i]
+    except:
+        newdict[i] = 0
+print(words)
+
+info.close()
+max = 0
+x = 0
+word = []
+for i in words:
+    range = len(i)
+
+    if range > max:
+        x += 1
+        max = range
+        word.append(i)
+
+print("The longest word in the first chapter is",max, "letters long and is:",word[x-1],)
+alice()
