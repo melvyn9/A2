@@ -1,0 +1,63 @@
+class MyTime:
+    def __init__(self, hrs=0, mins=0, secs=0):
+        """ Create a MyTime object initialized to hrs, mins, secs """
+        self.hours = hrs
+        self.minutes = mins
+        self.seconds = secs
+    def between(self,t1,t2):
+        time1 = (t1.hours*3600) + (t1.minutes*60) + (t1.seconds)
+        time2 = (t2.hours*3600) + (t2.minutes*60) + (t2.seconds)
+        objecttime = (self.hours*3600) + (self.minutes*60) + (self.seconds)
+        if objecttime >= time1 and objecttime < time2:
+            return True
+        return False
+    def __gt__(self, other):
+        if ((self.hours*3600) + (self.minutes*60) + (self.seconds)) > ((other.hours*3600) + (other.minutes*60) + (other.seconds)):
+            return True
+        return False
+#1
+def between(arg,t1,t2):
+        time1 = (t1.hours*3600) + (t1.minutes*60) + (t1.seconds)
+        time2 = (t2.hours*3600) + (t2.minutes*60) + (t2.seconds)
+        objecttime = (arg.hours*3600) + (arg.minutes*60) + (arg.seconds)
+        if objecttime >= time1 and objecttime < time2:
+            return True
+        return False
+t1 = MyTime(12,34,56)
+t2 = MyTime(12,35,12)
+obj = MyTime(12,35,22)
+print('Task 1:', between(obj,t1,t2))
+
+#2
+t1 = MyTime(13,34,56)
+t2 = MyTime(13,35,12)
+obj = MyTime(13,35,2)
+print('Task 2:', obj.between(t1,t2))
+
+#3
+print('Task 3:', t1>t2)
+
+class MyTime2:
+    def __init__(self, hrs=0, mins=0, secs=0):
+       totalsecs = hrs*3600 + mins*60 + secs
+       self.hours = totalsecs // 3600
+       leftoversecs = totalsecs % 3600
+       self.minutes = leftoversecs // 60
+       self.seconds = leftoversecs % 60
+    def increment(self,seconds):
+        self.seconds += seconds
+        List = [self.hours,self.minutes,self.seconds]
+        return MyTime2(List[0],List[1],List[2])
+    def printstring(self):
+        return (str(self.hours) + ':' + str(self.minutes) + ':' + str(self.seconds))
+
+#4
+t1 = MyTime2(12,34,52)
+t1 = t1.increment(8)
+print('Task 4:',t1.printstring())
+
+#5
+t1 = MyTime2(12,34,52)
+for i in [0, 8, 65, 3600,-3673]:
+    t1 = t1.increment(i)
+    print('Task 4.' + str(i) + ':',t1.printstring())
