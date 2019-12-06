@@ -1,1 +1,137 @@
+def Question_26_1():
+    import time
+    class Node:
+        def __init__(self, cargo=None, next=None):
+            self.cargo = cargo
+            self.next = next
 
+        def __str__(self):
+            return str(self.cargo)
+
+    class Queue_list:
+        def __init__(self):
+            self.que = []
+        def is_empty(self):
+            return len(self.que) == 0
+
+        def insert(self, cargo):
+            self.que.append(cargo)
+
+        def remove(self):
+            self.que.pop()
+
+
+    class ImprovedQueue:
+        def __init__(self):
+            self.length = 0
+            self.head = None
+            self.last = None
+
+        def is_empty(self):
+            return self.length == 0
+
+        def insert(self, cargo):
+            node = Node(cargo)
+            if self.length == 0:
+                # If list is empty, the new node is head and last
+                self.head = self.last = node
+            else:
+                # Find the last node
+                last = self.last
+                # Append the new node
+                last.next = node
+                self.last = node
+            self.length += 1
+
+        def remove(self):
+            cargo = self.head.cargo
+            self.head = self.head.next
+            self.length -= 1
+            if self.length == 0:
+                self.last = None
+
+
+    while True:
+        try:
+            length = int(input("please give a length of queue"))
+            break
+        except ValueError:
+            print("provide a number please")
+    values = []
+    for k in range(length):
+        values.append(k+1)
+    t1 = time.time()
+    for i in values:
+        basic = Queue_list()
+        basic.insert(i)
+
+    t2 = time.time()
+    print("done basic, took:", abs(t1-t2))
+
+    t1 = time.time()
+    for j in values:
+        better = ImprovedQueue()
+        better.insert(j)
+        better.remove()
+
+    t2 = time.time()
+    print("done improved, took:",abs(t1-t2))
+# improved takes longer as it has to check if length is 0 everytime
+
+def Question_26_2():
+    class Node:
+        def __init__(self, cargo=None, next=None):
+            self.cargo = cargo
+            self.next = next
+
+        def __str__(self):
+            return str(self.cargo)
+
+    class ImprovedQueue:
+        def __init__(self):
+            self.length = 0
+            self.head = None
+            self.last = None
+            self.lister = []
+
+        def create_list(self, node):
+            self.lister.append(node)
+            if node.next != None:
+                ImprovedQueue.create_list(self, node.next)
+            return self.lister
+
+
+        def is_empty(self):
+            return self.length == 0
+        def insert(self, cargo):
+            node = Node(cargo)
+            if self.length == 0:
+                # If list is empty, the new node is head and last
+                self.head = self.last = node
+            else:
+                self.last.next = node
+                taken = ImprovedQueue.create_list(self, self.head)
+                for i in range(len(taken)-1):
+                    for j in range(len(taken)-i-1):
+                        if taken[j].cargo > taken[j+1].cargo:
+                            hold = taken[j]
+                            taken[j] = taken[j+1]
+                            taken[j+1] = hold
+                if len(taken) == 1:
+                    self.head = self.last = taken[0]
+                else:
+                    self.head = taken[0]
+                    self.last = taken[len(taken)-1]
+                    for i in taken:
+                        try:
+                            i.next = taken[taken.index(i)+1]
+                        except IndexError:
+                            i.next = None
+            self.length += 1
+    hope = ImprovedQueue()
+    hope.insert(12)
+    hope.insert(6)
+    hope.insert(20)
+    hope.insert(1)
+    print(hope.head)
+    print(hope.last)
