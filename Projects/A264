@@ -1,0 +1,13 @@
+class planet:
+    def __init__(self,mass,radius):
+        self.mass = mass
+        self.radius = radius
+
+    def escapevelocity(self):
+        G = 6.673*(10**-11)
+        v = ((2*G*self.mass/self.radius))**0.5
+        print("The escape velocity is",v,"m/s")
+
+
+Earth = planet(5.972*(10**24),6371000)
+Earth.escapevelocity()
